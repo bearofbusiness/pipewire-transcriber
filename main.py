@@ -88,8 +88,11 @@ class TranscriberApp(Gtk.Window):
         self.stop_btn = Gtk.Button(label="Stop")
         self.stop_btn.connect("clicked", self.on_stop)
         self.stop_btn.set_sensitive(False)
+        self.clear_btn = Gtk.Button(label="Clear")
+        self.clear_btn.connect("clicked", self.clear_text)
         btn_box.append(self.start_btn)
         btn_box.append(self.stop_btn)
+        btn_box.append(self.clear_btn)
         vbox.append(btn_box)
 
         # State
@@ -151,6 +154,10 @@ class TranscriberApp(Gtk.Window):
         self.start_btn.set_sensitive(True)
         self.append_text("Transcription stopped.\n")
 
+    def clear_text(self, btn):
+        self.textview.get_buffer().set_text("")
+        pass
+
     def capture_loop(self):
         chunk = int(PIPEWIRE_RATE * CHUNK_DURATION * 2 * 2)
         while self.running:
@@ -165,6 +172,8 @@ class TranscriberApp(Gtk.Window):
             segments, _ = self.model.transcribe(audio, beam_size=5)
             text = ''.join(seg.text for seg in segments)
             self.append_text(text + "\n")
+
+
 
 if __name__ == "__main__":
     app = TranscriberApp()
