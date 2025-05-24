@@ -17,15 +17,14 @@ A lightweight GUI application for capturing PipeWire (PulseAudio) monitor audio 
 ## Prerequisites
 
 1. **Python 3.13+**
-2. **PulseAudio utilities** (for `parec`):
-
+2. **PulseAudio utilities** (for `parec`):\
+   you prolly dont need it
    ```bash
    sudo apt install pulseaudio-utils    # Debian/Ubuntu
    sudo pacman -S pulseaudio            # Arch
    ```
 3. **PipeWire with PulseAudio compatibility**
 4. **Required Python packages** (install in a virtual environment):
-
    ```bash
    pip install sounddevice numpy faster-whisper pygobject pulsectl
    ```
